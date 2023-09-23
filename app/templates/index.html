@@ -24,13 +24,21 @@
             <div class="masthead-content text-white">
                 <div class="container-fluid px-4 px-lg-0">
                     <h1 class="fst-italic lh-1 mb-4">Induskriti is Coming Soon</h1>
-                    <p class="mb-5">Sign up below to be notified when we launch!</p>
+                    <p class="mb-5">Sign up below for<strong> a lucrative offer!</strong></p>
+
                     
                     <form action="{{ url_for('index') }}" method="POST">
                         {{ form.hidden_tag() }}
                         {{ form.csrf_token() }}
                         <fieldset class="d-flex flex-row">
-                            {{ form.email(class="form-control form-control-md", placeholder="Sign Up for exciting offers") }}
+                            {{ form.email(class="form-control form-control-md", placeholder="name@example.com") }}
+                            {% if form.email.errors %}
+                                <div class="alert alert-{{ category }} text-center m-lg-3 my-1 w-100">
+                                    {% for error in form.email.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                             {{ form.submit(class="btn btn-outline-info btn-sm ms-3") }}
                         </fieldset>
                     </form>
@@ -39,7 +47,7 @@
                         {% with messages = get_flashed_messages(with_categories=true) %}
                         {% if messages %}
                         {% for category, message in messages %}
-                        <div class="alert alert-{{ category }} text-center m-3" style="width:max-content">
+                        <div class="alert alert-{{ category }} text-center m-lg-3 my-1 w-100" style="width:max-content">
                             {{ message }}
                         </div>
                         {% endfor %}

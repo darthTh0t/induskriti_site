@@ -5,7 +5,7 @@ class Customer(db.Model):
 
     __tablename__="cust_info"
     id = db.Column("id", db.Integer, primary_key=True)
-    email = db.Column("email", db.String)
+    email = db.Column("email", db.String, unique=True)
 
     def __repr__(self) -> str:
         return f'<Customer {self.email}>'
