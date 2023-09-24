@@ -5,6 +5,7 @@ class Customer(db.Model):
 
     __tablename__="cust_info"
     id = db.Column("id", db.Integer, primary_key=True)
+    name = db.Column("name", db.String(30))
     email = db.Column("email", db.String, unique=True)
 
     def __repr__(self) -> str:
